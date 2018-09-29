@@ -1,14 +1,29 @@
 ---
 output: rmarkdown::github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 # unsound
 
+Retrieve Current and Historical Upper Air Soundings Data from the University of Wyoming
+
 ## Description
+
+The University of Wyoming maintains a server (<http://weather.uwyo.edu/upperair/sounding.html>) that provides an interface to query current and historical upper air soundings data. Tools are provided to query this service and retrieve the data.
+
+Ref:
+
+- <https://stackoverflow.com/questions/52535696/save-content-in-web-as-data-frame/52539658#52539658>
+- <https://stackoverflow.com/questions/52543892/web-scraping-using-httr-give-xml-nodeset-error/52545775?noredirect=1#comment92066543_52545775>
 
 ## What's Inside The Tin
 
 The following functions are implemented:
+
+- `get_region_codes`:	Retrive region names and codes
+- `get_sounding_data`:	Get sounding data for a station
+- `rbind_soundings`:	Turn a list of soundings data frames into a single data frame
 
 ## Installation
 
@@ -24,9 +39,64 @@ options(width=120)
 
 ```{r message=FALSE, warning=FALSE, error=FALSE}
 library(unsound)
+library(magick)
+library(tidyverse) # overkill since it's just for data frame pretty printing
 
 # current verison
 packageVersion("unsound")
 
 ```
 
+### Region codes
+
+```{r}
+get_region_codes()
+```
+
+### Full example (via the SO question(s))
+
+```{r cache=TRUE}
+# get the start/end range
+startDate <- as.Date("01-11-17", format="%d-%m-%y")
+endDate <- as.Date("31-01-18",format="%d-%m-%y")
+
+# make a sequence
+days <- seq(startDate, endDate, "1 day")
+
+lapply(days[1:4], function(day) {
+  
+  Sys.sleep(3) # be kind to their servers
+  
+  get_sounding_data(
+    region = "seasia",
+    date = day,
+    from_hr = "00",
+    to_hr = "00",
+    station_number = "48657"
+  )
+}) -> soundings_48657
+
+# Notice there's missing data for one day
+str(soundings_48657)
+
+# make one big data frame
+soundings_48657 <- rbind_soundings(soundings_48657)
+
+glimpse(soundings_48657)
+
+soundings_48657
+```
+
+### Maps
+
+```{r}
+get_sounding_map(
+  station_number = "48657", 
+  date = Sys.Date()-1, 
+  map_type = "skewt", 
+  map_format = "gif", 
+  region = "seasia", 
+  from_hr = "00", 
+  to_hr = "00"
+)
+```

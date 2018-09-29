@@ -4,9 +4,16 @@
 \name{unsound}
 \alias{unsound}
 \alias{unsound-package}
-\title{...}
+\title{Retrieve Current and Historical Upper Air Soundings Data from the University of Wyoming}
 \description{
+The University of Wyoming maintains a server (\url{http://weather.uwyo.edu/upperair/sounding.html})
+that provides an interface to query current and historical upper air soundings
+data. Tools are provided to query this service and retrieve the data.
+}
+\details{
 \itemize{
+\item \url{https://stackoverflow.com/questions/52535696/save-content-in-web-as-data-frame/52539658#52539658}
+\item \url{https://stackoverflow.com/questions/52543892/web-scraping-using-httr-give-xml-nodeset-error/52545775?noredirect=1#comment92066543_52545775}
 \item URL: \url{https://gitlab.com/hrbrmstr/unsound}
 \item BugReports: \url{https://gitlab.com/hrbrmstr/unsound/issues}
 }

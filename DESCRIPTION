@@ -1,6 +1,6 @@
 Package: unsound
 Type: Package
-Title: unsound title goes here otherwise CRAN checks fail
+Title: Retrieve Current and Historical Upper Air Soundings Data from the University of Wyoming
 Version: 0.1.0
 Date: 2018-09-29
 Authors@R: c(
@@ -8,11 +8,13 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-5670-2640"))
   )
 Maintainer: Bob Rudis <bob@rud.is>
-Description: A good description goes here otherwise CRAN checks fail.
+Description: The University of Wyoming maintains a server (<http://weather.uwyo.edu/upperair/sounding.html>)
+    that provides an interface to query current and historical upper air soundings 
+    data. Tools are provided to query this service and retrieve the data.
 URL: https://gitlab.com/hrbrmstr/unsound
 BugReports: https://gitlab.com/hrbrmstr/unsound/issues
 Encoding: UTF-8
-License: AGPL
+License: MIT + file LICENSE
 Suggests:
     testthat,
     covr
@@ -20,5 +22,8 @@ Depends:
     R (>= 3.2.0)
 Imports:
     httr,
-    jsonlite
+    rvest,
+    xml2,
+    memoise,
+    magick
 RoxygenNote: 6.0.1.9000
