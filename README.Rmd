@@ -1,0 +1,32 @@
+---
+output: rmarkdown::github_document
+---
+
+# unsound
+
+## Description
+
+## What's Inside The Tin
+
+The following functions are implemented:
+
+## Installation
+
+```{r eval=FALSE}
+devtools::install_github("hrbrmstr/unsound")
+```
+
+```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
+options(width=120)
+```
+
+## Usage
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+library(unsound)
+
+# current verison
+packageVersion("unsound")
+
+```
+
